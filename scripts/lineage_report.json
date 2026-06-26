@@ -1,0 +1,68 @@
+{
+  "pipeline": "Enterprise Lakehouse Platform",
+  "created_at": "2026-06-26T13:56:23.240189",
+  "layers": {
+    "raw": {
+      "source": "Yahoo Finance API",
+      "tables": [
+        "raw_stock_prices"
+      ],
+      "format": "Parquet",
+      "records": "1,255+ daily"
+    },
+    "bronze": {
+      "source": "raw_stock_prices",
+      "tables": [
+        "bronze_stock_prices"
+      ],
+      "format": "Delta Lake",
+      "transformations": [
+        "null removal",
+        "type casting"
+      ],
+      "records": "1,255+ daily"
+    },
+    "silver": {
+      "source": "bronze_stock_prices",
+      "tables": [
+        "silver_stock_prices"
+      ],
+      "format": "Delta Lake",
+      "transformations": [
+        "daily_return calculation",
+        "price_range calculation"
+      ],
+      "records": "1,255+ daily"
+    },
+    "gold": {
+      "source": "silver_stock_prices",
+      "tables": [
+        "gold_stock_summary"
+      ],
+      "format": "Delta Lake + Apache Iceberg",
+      "transformations": [
+        "aggregations",
+        "analytics-ready models"
+      ],
+      "records": "5 symbols aggregated"
+    }
+  },
+  "quality_checks": {
+    "framework": "Great Expectations",
+    "total_checks": 6,
+    "passed": 6,
+    "failed": 0,
+    "pass_rate": "100%"
+  },
+  "infrastructure": {
+    "provisioning": "Terraform",
+    "cloud": "AWS S3",
+    "ci_cd": "GitHub Actions",
+    "layers": [
+      "Raw",
+      "Bronze",
+      "Silver",
+      "Gold"
+    ]
+  }
+}
