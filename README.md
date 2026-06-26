@@ -35,3 +35,21 @@ Phase 2 Pending: Apache Spark + Delta Lake
 Phase 3 Pending: Apache Iceberg + Unity Catalog
 Phase 4 Pending: DataHub + Data Lineage
 Phase 5 Pending: dbt + Data Quality
+
+## dbt Transformations
+dbt models implemented in Financial Data Pipeline project:
+- Staging models: Raw data cleaning and validation
+- Mart models: Business-ready analytical datasets
+- Data lineage: Full column-level lineage tracking
+- Tests: Automated quality validation
+
+See: github.com/meghashyamkomari-prog/financial-data-pipeline
+
+## dbt Transformations
+dbt models implemented in Financial Data Pipeline project:
+- Staging models: Raw data cleaning and validation
+- Mart models: Business-ready analytical datasets
+- Data lineage: Full column-level lineage tracking
+- Tests: Automated quality validation
+
+See: github.com/meghashyamkomari-prog/financial-data-pipeline
